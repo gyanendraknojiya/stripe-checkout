@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="text-center mt-5"><button class="btn btn-primary btn-sm" data-checkout-mode="payment"
+      data-price-id="prod_IspeFcpIt6kR1j" id="paymentButton">Pay</button></div>
+
+
+      <script>
+        
+      var PUBLISHABLE_KEY = 'pk_live_51H5GCTJq9ooUzKyltpVv1hV6DlnTbntpKi39TxwfusrZwFAhu303ISLGlLUV7U1PvYMCVVzTEhwIkeq6zZybdWgw009xdmi2H9';
+      var DOMAIN = location.href.replace(/[^/]*$/, ''); 
+
+      var stripe = Stripe(PUBLISHABLE_KEY);
+
+      document.querySelectorAll('button').forEach(function (button) {
+        button.addEventListener('click', function (e) {
+          var mode = e.target.dataset.checkoutMode;
+          var priceId = e.target.dataset.priceId;
+          var items = [{ price: priceId, quantity: 1 }];
+
+          stripe
+            .redirectToCheckout({
+              mode: mode,
+              lineItems: items,
+              successUrl:
+                DOMAIN + 'success.html?session_id={CHECKOUT_SESSION_ID}',
+              cancelUrl:
+                DOMAIN + 'canceled.html?session_id={CHECKOUT_SESSION_ID}',
+            })
+            .then(()=>console.log("result"));
+        });
+      });
+      </script>
+</body>
+
+</html>
