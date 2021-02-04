@@ -13,12 +13,12 @@
 
 <body>
   <div class="text-center mt-5"><button class="btn btn-primary btn-sm" data-checkout-mode="payment"
-      data-price-id="prod_IspeFcpIt6kR1j" id="paymentButton">Pay</button></div>
+      data-price-id="price_1IH4ngJq9ooUzKylO3gORsc2" id="paymentButton">Pay</button></div>
 
 
       <script>
         
-      var PUBLISHABLE_KEY = 'pk_live_51H5GCTJq9ooUzKyltpVv1hV6DlnTbntpKi39TxwfusrZwFAhu303ISLGlLUV7U1PvYMCVVzTEhwIkeq6zZybdWgw009xdmi2H9';
+      var PUBLISHABLE_KEY = 'pk_test_51H5GCTJq9ooUzKyliKM7LRWIpUjWoh6ZsydoPgL9UgY7FN2sPejzVHaSt3D5CgsOTuK4wRM7fa5iyn3dmQ0cWtYt00HXwYBGUi';
       var DOMAIN = location.href.replace(/[^/]*$/, ''); 
 
       var stripe = Stripe(PUBLISHABLE_KEY);
@@ -28,6 +28,8 @@
           var mode = e.target.dataset.checkoutMode;
           var priceId = e.target.dataset.priceId;
           var items = [{ price: priceId, quantity: 1 }];
+
+          console.log(items)
 
           stripe
             .redirectToCheckout({
